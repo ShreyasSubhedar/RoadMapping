@@ -1,17 +1,30 @@
 <?php
-date_default_timezone_set("Asia/Kolkata");
+
 class Duration {
-    //protected $start_time = time("h:i:sa");
-    //protected $end_time;
-    protected $time;
-    protected $total_time;
-
-    function get_calculatedTime($speed, $distance)
+    private $timeTaken;
+    
+    function _construct($timeTaken)
     {
-        $time = ($distance/$speed);
-        return $time;
+         $this->timeTaken = $timeTaken;
     }
-
+    
+    //This function sets the time taken 
+    function set_time_taken($time)
+    {
+        return this->$timeTaken = $time;
+    }
+    
+    // This function returns the time taken
+    function get_time_taken()
+    {
+        return this->$timeTaken;
+    }
+    
+    //This function performs the calculation of the time taken for a particulae speed and distance
+    function update_total_time($val)
+    {
+        return this->$timeTaken = this->$timetaken + $val;
+    }
 }
 
 ?>
