@@ -14,14 +14,7 @@ matrix:
    - php: 7.0
    - php: 7.2
  allow_failures:
-   - php: hhvm
-install:
- - composer install
- - cp app/config/parameters.yml.dist app/config/parameters.yml
- - php bin/console doctrine:database:create --env=test
- - php bin/console doctrine:schema:create --env=test
- - php bin/console doctrine:fixtures:load -n --env=test
-
+   - php: 7.2
 #before script installation
 before_script:
   - curl -sSfL -o ~/.phpenv/versions/hhvm/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar
