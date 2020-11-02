@@ -22,7 +22,7 @@ jobs:
     - find . -name '*.php' -exec php -l {} \;
   - stage: Docker Image Building
     script:
-      - docker build --tag $DOCKER_USER/Road-mapping .
+      - docker build --tag $DOCKER_USER/road-mapping .
   - stage: Security Check
     script:
       - curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- $DOCKER_USER/Road-mapping
