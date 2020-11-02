@@ -22,7 +22,7 @@ jobs:
     - find . -name '*.php' -exec php -l {} \;
   - stage: Unit Testing
     script:
-    - phpunit  /tests
+    - sudo phpunit /tests
   - stage: Docker Image Building
     script:
       - docker build --tag $DOCKER_USER/Road-mapping .
