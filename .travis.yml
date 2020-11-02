@@ -17,12 +17,12 @@ before_script:
 # Run script
 jobs:
   include:
-  - stage: Static Code Analysis
-    script:
-    - find . -name '*.php' -exec php -l {} \;
+  # - stage: Static Code Analysis
+  #   script:
+  #   - find . -name '*.php' -exec php -l {} \;
   - stage: Docker Image Building
     script:
-      - docker build --t $DOCKER_USER/road-mapping .
+      - docker build -t $DOCKER_USER/road-mapping .
   - stage: Security Check
     script:
       - curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- $DOCKER_USER/road-mapping
