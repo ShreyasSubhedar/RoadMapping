@@ -1,43 +1,31 @@
 language: php
-# Allows use container-based infrastructure
 sudo: false
-# Start docker  service
 services:
- - docker
-
-
-global:
-  - secure: WujBjVUelfDjzMe2A1lSNggjwIYzOEe96OCqa0ZfYdMvuN2beej2KgQbWysl4p7WFUA9eOq/nB8ChPaPZKY6Lly6t5B39j1fnN+5xsApDtGGMNhtQIrQrmjFPfRJkkVxqzFPhvaU9SRvxIb2CjmGQ6MlCOTIqigbkL7/cYLNyysTquuI6r8dpG8yHQoWMXDNItsWtGjOTmZG3uHLAeCWK6sknAfG9iGfgeJA20bvbDvi9diMInCKGqQogyWWBJdtwQDYridKzNDcH/+Bx9xE+qjVWd7g3OiIt9H5ocSLMckxW7gL5kgNTZGhNPizNvCk4+NHnQqqlEYNk7CsDhxfFlXTEcG3VAZIYvm10U8O+wVYvBYI7txATbTWnHVFBP3fPmRgurwauH/HEVKGkx6e9H9s5RvKOcYqH/4dI0q5knVwmIEZ7eZToE281qvlFc3Y+aXeU2AfNvGgRdIIi5Sq95ZRUUOltmYykrj+LYXpZ8b7rxfrTtVTkLKY/lslFuEj9TPQ/DSEsYZekw5nUl4wxZ++9mUvK4+zADDb5DUit94zMwAbS/G+nmA0zPFLzxDPXk8mU7AzxDZtkC9bZMqZxwq3SHHwPa2UBRc6dv760rv9+yW6T/L7S0ZmmGUef3axU1ZCMLK+WDgIXQvumKXJd91TaUz3wx3WWOYq/pvB6cY=
-  - secure: H51cEI9Wn06TpyeqDeMrj+AcS0oHp8h5t82rwCMROfp2kYc5zz1BedmBK293cHwfnv6mN5uAYSzPHZOBkeUY/zFWjytebYE2aPPHoC1J+WAKXmW3+2eny7AUlNWSSiUuWZ67yJafP0ffviacYCePpZPyTC/8zOnnyRO+WPOEmDtkZEea537x+ELHqzVZfQbwpMGFGNk/hAv7e6l+eF5e/aktXWwNfiObYmV7wvDEjAsIf1IIj1/KKk+x14QZ0YRWzWXpKr1a4u4aWvRcVoZblYHYnWm3TL1MxHQd9Clp17JWcQ6ulW28Esza1cCTpCn6jWpzFDyZXP8wogTNxBc8r55UvLSqmGvOTFR1fTerqCcjMafefsWTIcqyZAUUnPuVgBJrEXgFhFUKmR0IU1Eme2G/OdTn0YP4Xif7eCC4fTYRprx6P5MlipnCmL62XnCfphKXMkwGPHS74O4slgOZA0EheJiIZdPSp0rCMtkq5aXW5mRGSBpZwZ8hYpyHekhQcLX5jrhKlnaISayANOKcx5DK/TVyGGxobrv3lOWsPii6J1pjzGFT6/j5jXM2OHE6d0Bc2/IO/KzMK4dK9M6wJFKhW5uSIHnZxs+LG2CgkfIfzkfd1nyGGwUTl88sVaY+JHRlUPvRlWHEezzqtEJK317U5gr5/PLyo0uXSNyzriY=
-
-# Cache composer packages so "composer install" is faster
-
+- docker
 php:
-  - "7.3"
+- '7.3'
 cache:
   directories:
-    - $HOME/.composer/cache
-#before script installation
+  - "$HOME/.composer/cache"
 before_script:
-  - curl -sSfL -o ~/.phpenv/versions/hhvm/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar
-# Run script
+- curl -sSfL -o ~/.phpenv/versions/hhvm/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar
 jobs:
   include:
-  # - stage: Static Code Analysis
-  #   script:
-  #   - find . -name '*.php' -exec php -l {} \;
+  - stage: Static Code Analysis
+    script:
+    - find . -name '*.php' -exec php -l {} \;
   - stage: Docker Image Building
     script:
-      - echo "IloveGorilla@451" | docker login -u shreyasxo --password-stdin 
-      - docker build -t shreyasxo/road-mapping .
-      - docker push shreyasxo/road-mapping
-
+    - echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USERNAME --password-stdin
+    - docker build -t $DOCKER_USERNAME/road-mapping .
+    - docker push $DOCKER_USERNAME/road-mapping
   - stage: Security Check
     script:
-      - curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- shreyasxo/road-mapping
-  # - stage: Docker Image Registry
-  #   script:
-      
+    - curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- $DOCKER_USERNAME/road-mapping
   - stage: deploy
     script:
-      - echo "Deploying the container to beanstalk"
+    - echo "Deploying the container to beanstalk"
+env:
+  global:
+  - secure: Li/2XLCAzI/FRF8bvNKPk++Su4M6X2kSwK/rf4/7PV90yFQ1hfiNqRhUMZpMNd1ArSFlgey99RRtnE+HuJBVQoN2I+Z5tBrlhRPCySh4Fzp0QnCZpJ97F5pv3PEr/5mOb+9Bf3YrUq4XEPDhNSYzGIHPHXp2uGCEwV71L7lT7E/+jhmS9TmVnsTncYME2am+coJU6j7BjwjBXuwFZDV91Jw06VcSf+hMYv6SoXnRGesIvM0VZg0qK0+ee11mweEZyJGx+v148Z+IFiMEzTTACaOd+C7AnayDa7cEToeAZVxVzulWNbaiPmHZRVE+ly/nVgB9VYY1tVCwi6rQFyrmQjK/WVeT1uuGpLijtd4ss2smuR/zAETcVFmLVEeIIP/PyH35VN2teZ5qPeHvHy/wFAomrLHqUViMXy9/55y25jKkervv1c5W+tYO+U3shnH0DCRjMJ108nkSZKulefpKAwaypHze41aqj6iyWKZaQwd1zQ/gApobjqWP1MAp4PLMbogWEeoUfGlxx3oPZwebB9InLnkET29+sSpgJxEDD/90JFjZZkQbcflX3tzDPArcQmNbxvxFUaJzS5+B3rOQNJgtMVrFKHe/HrRE2dCBK5tKHXlfg+mfwpf1UKU0jfnqoeJHgMEPai4WidMn7cuPf+GLwqGcywctB2LzBbfoErA=
+  - secure: byK+qL29tWtvPtPhjXsmtleRz8TLmlZMT001bxOrmx/o9r4MkBkALzLSCPYBJKeXOjTPKJ4zBJySrgMOtJ0VV0N/YjpJ7fMQpwCyK6EnqJFJbxBEKNVeK5x0X96E6Kq5CjRXFzKcnHK1hMsCJgjVDG9OXQC3E/EF+eTt5iL5hEXnnawDwbmTL5gjmjjKkeFIXeaoAoIb9PhU32auzEOPPzzmcT5PaVskFXzFy+cAR/P5GXiBgPB5ng1Dpkcijmu/+SWL2JLbiNK/UeS+jli+XaSCbQp1wY0DzScfqNkUrTf196atpTJNwznRBdcjd5wF44Lb+2CMOE57v/9rl536g77Nhsp1jX6AJt7uTLKjhgucj7URdyT7yVFt2BeYXKhf9WuhSaMrFbc83YQlQSbIo05UGf0NMTRlAivWCdRiJWK3qtrZvgHwAdOBP205e1dFRYYKaqcZzD5tZV8AIN6nveU2ug8lQ9CQve2Li7w+HE5c4qoWUzZpOz2+R/twRgt9yZO4ooCMis8z5OOqlZ4tghaC/wBoAoV0C2J79YMs7WSzY+t5De5/rBIhoxiVAvQSFxijgvBYHUtK6oydJNEv0h2QbtI+2x4Cr5AjuDw8Q678AIyqVbE07gkjtIZUtMC55367Xwt+wYWwKg4CWyZtlGp7gEAgKtGgFy5Ll7In9DA=
