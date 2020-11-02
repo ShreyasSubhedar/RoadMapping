@@ -20,9 +20,6 @@ jobs:
   - stage: Static Code Analysis
     script:
     - find . -name '*.php' -exec php -l {} \;
-  - stage: Unit Testing
-    script:
-    - sudo phpunit /tests
   - stage: Docker Image Building
     script:
       - docker build --tag $DOCKER_USER/Road-mapping .
