@@ -6,15 +6,11 @@ services:
  - docker
 # Cache composer packages so "composer install" is faster
 
-# Matrix to test in every php version
-matrix:
- # Fast finish allows to set the build as "finished" even if the "allow_failures" matrix elements are not finished yet.
- fast_finish: true
- include:
-   - php: 7.0
-   - php: 7.2
- allow_failures:
-   - php: 7.2
+php:
+  - "7.3"
+cache:
+  directories:
+    - $HOME/.composer/cache
 #before script installation
 before_script:
   - curl -sSfL -o ~/.phpenv/versions/hhvm/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar
@@ -25,6 +21,8 @@ jobs:
     script:
     - find . -name '*.php' -exec php -l {} \;
   - stage: Unit Testing
+    install:
+      - "composer install"
     script:
     - phpunit --coverage-html ./index.html /tests
   - stage: Docker Image Building
