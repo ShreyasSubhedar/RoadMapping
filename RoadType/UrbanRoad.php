@@ -1,32 +1,32 @@
 
 <?php
 # Including interface RoadType.php
-include ('RoadType.php');
+include('RoadType.php');
 
-class UrbanRoad implements RoadType{
+class UrbanRoad implements RoadType
+{
     protected $max_car_dropage;
     protected $speed_limit;
-    protected $garage_distace=20;
+    protected $garage_distace = 20;
     protected $road_length;
-    protected $initial_speed=70;
+    protected $initial_speed = 70;
 
-# GetRoadLength() returns the road limit.
-public function GetRoadLength()
-{
-   return $this->road_length;
-}
+    # GetRoadLength() returns the road limit.
+    public function GetRoadLength()
+    {
+        return $this->road_length;
+    }
 
-# GetSpeedLimit() return speed limit of the road.
-public function GetSpeedLimit($percentage)
-{
-    $this->speed_limit= $this->initial_speed +( $this->initial_speed*$percentage)/100;
-   return $this->speed_limit;
-}
-# SetRoadLength() uses $roadLength to set the length of the road.
-public function SetRoadLength($road_length)
-{
-    $this->road_length=$road_length;
-}
-
+    # GetSpeedLimit() return speed limit of the road.
+    public function GetSpeedLimit($percentage)
+    {
+        $this->speed_limit = $this->initial_speed + ($this->initial_speed * $percentage) / 100;
+        return $this->speed_limit;
+    }
+    # SetRoadLength() uses $roadLength to set the length of the road.
+    public function SetRoadLength($road_length)
+    {
+        $this->road_length = $road_length;
+    }
 }
 ?>
