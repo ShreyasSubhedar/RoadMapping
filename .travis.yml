@@ -21,8 +21,6 @@ jobs:
     script:
     - find . -name '*.php' -exec php -l {} \;
   - stage: Unit Testing
-    install:
-      - composer install
     script:
     - phpunit --coverage-html ./index.html /tests
   - stage: Docker Image Building
