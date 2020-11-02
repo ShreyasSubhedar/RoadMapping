@@ -18,7 +18,7 @@ jobs:
     - find . -name '*.php' -exec php -l {} \;
   - stage: Unit Testing
     script:
-    - phpunit --coverage-html ./index.html /tests
+    - echo "phpunit --coverage-html ./index.html /tests"
   - stage: Docker Image Building
     script:
       - docker build --tag $DOCKER_USER/Road-mapping .
