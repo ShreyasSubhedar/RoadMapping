@@ -25,11 +25,11 @@ jobs:
       - docker build --tag $DOCKER_USER/road-mapping .
   - stage: Security Check
     script:
-      - curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- $DOCKER_USER/Road-mapping
+      - curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- $DOCKER_USER/road-mapping
   - stage: Docker Image Registry
     script:
       - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin 
-      - docker push $DOCKER_USER/Road-mapping
+      - docker push $DOCKER_USER/road-mapping
   - stage: deploy
     script:
       - echo "Deploying the container to beanstalk"
