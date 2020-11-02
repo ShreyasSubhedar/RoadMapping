@@ -21,7 +21,7 @@ jobs:
     - docker push $DOCKER_USERNAME/road-mapping
   - stage: Security Check
     script:
-    - curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- $DOCKER_USERNAME/road-mapping
+    - curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- $DOCKER_USERNAME/road-mapping:latest
   - stage: deploy
     script:
     - echo "Deploying the container to beanstalk"
