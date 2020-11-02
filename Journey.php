@@ -38,10 +38,9 @@
         // This function tells the endpoint of the journey/mapping task
         //   function get_endPoint(){
         //     return $end_point;
-        //   }
+ }
 
 
 
 
-    }
 ?>
