@@ -22,14 +22,15 @@ jobs:
   #   - find . -name '*.php' -exec php -l {} \;
   - stage: Docker Image Building
     script:
+      - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin 
+      - docker push $DOCKER_USER/road-mapping
       - docker build -t $DOCKER_USER/road-mapping .
   - stage: Security Check
     script:
       - curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- $DOCKER_USER/road-mapping
-  - stage: Docker Image Registry
-    script:
-      - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin 
-      - docker push $DOCKER_USER/road-mapping
+  # - stage: Docker Image Registry
+  #   script:
+      
   - stage: deploy
     script:
       - echo "Deploying the container to beanstalk"
