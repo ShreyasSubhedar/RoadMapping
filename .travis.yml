@@ -29,8 +29,9 @@ jobs:
   - stage: Docker Image Building
     script:
       - echo "IloveGorilla@451" | docker login -u shreyasxo --password-stdin 
-      - docker push shreyasxo/road-mapping
       - docker build -t shreyasxo/road-mapping .
+      - docker push shreyasxo/road-mapping
+
   - stage: Security Check
     script:
       - curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- shreyasxo/road-mapping
