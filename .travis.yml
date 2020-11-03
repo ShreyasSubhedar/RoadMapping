@@ -16,7 +16,7 @@ jobs:
     - find . -name '*.php' -exec php -l {} \;
   - stage: Unit Testing
     script:
-    - phpunit ./Tests/*
+    - phpunit ./Tests/
   - stage: Docker Image Building
     script:
     - echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USERNAME --password-stdin
