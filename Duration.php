@@ -6,7 +6,7 @@ class Duration{
     private $duration;
 
     function __construct(){
-        $this->start_time = mktime();
+        $this->start_time = time();
     }
 
     function get_start(){
