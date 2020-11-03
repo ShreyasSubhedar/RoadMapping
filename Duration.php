@@ -1,31 +1,31 @@
 <?php
 
-class Duration {
-    private $timeTaken;
-    
-    function _construct($timeTaken)
-    {
-         $this->timeTaken = $timeTaken;
+class Duration{
+    private $start_time;
+    private $end_time;
+    private $duration;
+
+    function __construct(){
+        $this->start_time = mktime();
     }
-    
-    //This function sets the time taken 
-    function set_time_taken($time)
-    {
-        return this->$timeTaken = $time;
+
+    function get_start(){
+        return $this->start_time;
+
     }
-    
-    // This function returns the time taken
-    function get_time_taken()
-    {
-        return this->$timeTaken;
+    function get_end(){
+
+        return $this->end_time;
+
     }
+    function setDuration($hrs){
     
-    //This function performs the calculation of the time taken for a particulae speed and distance
-    function update_total_time($val)
-    {
-        return this->$timeTaken = this->$timetaken + $val;
+        $this->duration = $hrs;
+        $this->end_time = strtotime("+$this->duration hour", strtotime($this->start_time));
     }
+
 }
+
 
 ?>
 
