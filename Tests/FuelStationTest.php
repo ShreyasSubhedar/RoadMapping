@@ -2,7 +2,7 @@
 require_once ('Classes.php');
 use PHPUnit\Framework\TestCase;
 
-final class FuelStationTest extends TestCase
+final class fuelstationtest extends TestCase
 {
     public function testGetRoadDist(): void
     {

@@ -14,14 +14,19 @@ jobs:
   - stage: Static Code Analysis
     script:
     - find . -name '*.php' -exec php -l {} \;
+  - stage: Unit Testing
+    script:
+    - phpunit ./Tests/*
   - stage: Docker Image Building
     script:
     - echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USERNAME --password-stdin
     - docker build -t $DOCKER_USERNAME/road-mapping .
-    - docker push $DOCKER_USERNAME/road-mapping
+    - docker push $DOCKER_USERNAME/road-mapping:$BUILD_NO
   - stage: Security Check
     script:
-    - curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- -f -d Dockerfile $DOCKER_USERNAME/road-mapping:latest
+    - docker build -t $DOCKER_USERNAME/road-mapping .
+    - curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- -f -d Dockerfile
+      $DOCKER_USERNAME/road-mapping:latest
   - stage: deploy
     script:
     - echo "Deploying the container to beanstalk"
