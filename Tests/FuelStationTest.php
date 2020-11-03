@@ -7,7 +7,7 @@ final class fuelstationtest extends TestCase
     public function testGetRoadDist(): void
     {
         $obj = new Duration();
-        $this->assertEquals(mktime(),$obj->get_start());
+        $this->assertEquals(time(),$obj->get_start());
     }
 }
 ?>
