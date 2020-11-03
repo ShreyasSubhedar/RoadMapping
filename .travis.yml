@@ -17,17 +17,18 @@ jobs:
   - stage: Unit Testing
     script:
     - phpunit ./Tests/
+  - stage: Security Check
+    script:
+    - docker build -t road-mapping .
+    - curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- -f -d Dockerfile road-mapping:latest
   - stage: Docker Image Building
     script:
     - echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USERNAME --password-stdin
     - docker build -t $DOCKER_USERNAME/road-mapping .
     - docker push $DOCKER_USERNAME/road-mapping
-  - stage: Security Check
-    script:
-    - docker build -t road-mapping .
-    - curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- -f -d Dockerfile road-mapping:latest
-      $DOCKER_USERNAME/road-mapping:latest
-  - stage: deploy
+
+
+  - stage: Deployment
     script:
     - echo "Deploying the container to beanstalk"
 env:
