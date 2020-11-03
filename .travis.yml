@@ -24,8 +24,8 @@ jobs:
     - docker push $DOCKER_USERNAME/road-mapping:$BUILD_NO
   - stage: Security Check
     script:
-    - docker build -t $DOCKER_USERNAME/road-mapping .
-    - curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- -f -d Dockerfile
+    - docker build -t road-mapping .
+    - curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- -f -d Dockerfile road-mapping:latest
       $DOCKER_USERNAME/road-mapping:latest
   - stage: deploy
     script:
