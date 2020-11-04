@@ -1,0 +1,13 @@
+{
+    "id": "whitelist1",
+    "name": "My First Whitelist",
+    "comment": "A whitelist for my first try",
+    "version": "1_0",
+    "items": [
+      {
+        "gate": "vulnerabilities",
+        "trigger_id": "CVE-2020-269+*",
+        "id": "rule1"
+      }
+    ]
+  }
