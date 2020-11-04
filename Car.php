@@ -9,12 +9,81 @@ class Car{
     private $mappingStatus;
     private $fuelStatus = array('Full' => 0, 'Medium' => 0, 'Low' => 0, 'Empty' => 0);
 }
+
+
+
+
+
 if(isset($_POST['submit'])){
 
     $road_type = $_POST['roadType'];
     $road_length = $_POST['roadLength'];
     $rm = new RoadMap();
     $js=$rm->mapRoad($road_type,$road_length);
+    //Insert
+    // insert into logs values($uid,$dist,$time,$count,$speed,$roadLength,$roadType);
+
+    // $servername = "localhost:3306";
+// $username = "root";
+// $password = "root";
+// $dbname = "RoadMap";
+
+// // Create connection
+// // $conn = mysqli_connect($servername, $username, $password, $dbname);
+// // $conn = mysqli_connect("172.17.0.4", "root", "root","RoadMap");
+// $conn = mysqli_connect("172.17.0.6", "root", "root");
+
+// // Check connection
+// if (!$conn) {
+//   die("Connection failed: " . mysqli_connect_error());
+// }
+
+// // sql to create table
+// $sql = "CREATE TABLE logs (
+// uid VARCHAR(30),
+// dist VARCHAR(30),
+// time VARCHAR(30) ,
+// count VARCHAR(30),
+// roadLength VARCHAR(30),
+// roadType VARCHAR(30) 
+// )";
+
+// $query = "SELECT * FROM logs";
+// $result = $conn->query($query);
+
+// if ($result = $mysqli->query($query)) {
+//     while ($row = $result->fetch_assoc()) {
+//         $field1name = $row["uid"];
+//         $field2name = $row["dist"];
+//         $field3name = $row["time"];
+//         $field4name = $row["count"];
+//         $field5name = $row["roadLength"];
+//         $field6name = $row["roadType"];
+
+
+//         echo '<tr> 
+//                   <td>'.$field1name.'</td> 
+//                   <td>'.$field2name.'</td> 
+//                   <td>'.$field3name.'</td> 
+//                   <td>'.$field4name.'</td> 
+//                   <td>'.$field5name.'</td>
+//                   <td>'.$field6name.'</td> 
+//                   <td>'.$field7name.'</td>  
+//               </tr>';
+//     }
+//     $result->free();
+// }
+
+// $dist = $js->getDist();
+// $time = $js->getTime();
+// $count = $js->getCount();
+// $uid = time();
+// $roadType = $_POST['roadType'];
+// $roadLength= $_POST['roadLength'];
+
+
+
+
 
 }
 
@@ -99,8 +168,8 @@ if(isset($_POST['submit'])){
                 </div>
         </div>
     </div>
-
-    
+<!--     
+    Display Database -->
 
 
 

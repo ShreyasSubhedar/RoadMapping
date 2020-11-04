@@ -59,6 +59,13 @@ class RoadMap extends Journey{
         $js->updateTotalDistance($garage_dist);
         $js->updateTotalTime($garage_dist/$this->speed);
         $d->setDuration($js->time_taken);
+
+
+        // Insert into table
+
+      
+
+
         
         // echo " -------------------------------------------------------------"."\n" ;
         //  echo " Total Distance travelled: ". $js->total_distance."\n" ;
