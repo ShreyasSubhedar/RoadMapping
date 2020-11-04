@@ -1,0 +1,55 @@
+language: php
+sudo: false
+services:
+- docker
+php:
+- '7.3'
+cache:
+  directories:
+  - "$HOME/.composer/cache"
+jobs:
+  include:
+  - stage: Static Code Analysis
+    script:
+    - find . -name '*.php' -exec php -l {} \;
+  # - stage: Unit Testing
+  #   script:
+  #   - phpunit ./Tests/
+  # - stage: Security Check
+  #   script:
+  #   - docker build -t road-mapping .
+  #   - curl -s https://ci-tools.anchore.io/inline_scan-latest | bash -s -- -f -d Dockerfile
+  #     road-mapping:latest
+  # - stage: Docker Image Building
+  #   script:
+  #   - echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USERNAME --password-stdin
+  #   - docker build -t $DOCKER_USERNAME/road-mapping .
+  #   - docker push $DOCKER_USERNAME/road-mapping
+  - stage: Upload to S3
+    script: 
+     - echo "Deploying to S3" # usually you do not want to rerun any tests   
+    deploy: 
+      provider: s3
+      access_key_id: $AWS_ACCESS_KEY_ID
+      secret_access_key: $AWS_SECRET_ACCESS_KEY
+      bucket: "road-mapping"
+      glob: "*.zip"
+  - stage: Deployment
+    script: 
+     - echo " Deploying to Beanstalk" # usually you do not want to rerun any tests   
+    deploy:
+      provider: elasticbeanstalk
+      access_key_id: $AWS_ACCESS_KEY_ID
+      secret_access_key: $AWS_SECRET_ACCESS_KEY
+      region: "ap-south-1"
+      app: "RM"
+      env: "Rm-env"
+      bucket_name: "https://road-mapping.s3.ap-south-1.amazonaws.com/archive.zip"
+    
+env:
+  global:
+  - secure: Li/2XLCAzI/FRF8bvNKPk++Su4M6X2kSwK/rf4/7PV90yFQ1hfiNqRhUMZpMNd1ArSFlgey99RRtnE+HuJBVQoN2I+Z5tBrlhRPCySh4Fzp0QnCZpJ97F5pv3PEr/5mOb+9Bf3YrUq4XEPDhNSYzGIHPHXp2uGCEwV71L7lT7E/+jhmS9TmVnsTncYME2am+coJU6j7BjwjBXuwFZDV91Jw06VcSf+hMYv6SoXnRGesIvM0VZg0qK0+ee11mweEZyJGx+v148Z+IFiMEzTTACaOd+C7AnayDa7cEToeAZVxVzulWNbaiPmHZRVE+ly/nVgB9VYY1tVCwi6rQFyrmQjK/WVeT1uuGpLijtd4ss2smuR/zAETcVFmLVEeIIP/PyH35VN2teZ5qPeHvHy/wFAomrLHqUViMXy9/55y25jKkervv1c5W+tYO+U3shnH0DCRjMJ108nkSZKulefpKAwaypHze41aqj6iyWKZaQwd1zQ/gApobjqWP1MAp4PLMbogWEeoUfGlxx3oPZwebB9InLnkET29+sSpgJxEDD/90JFjZZkQbcflX3tzDPArcQmNbxvxFUaJzS5+B3rOQNJgtMVrFKHe/HrRE2dCBK5tKHXlfg+mfwpf1UKU0jfnqoeJHgMEPai4WidMn7cuPf+GLwqGcywctB2LzBbfoErA=
+  - secure: byK+qL29tWtvPtPhjXsmtleRz8TLmlZMT001bxOrmx/o9r4MkBkALzLSCPYBJKeXOjTPKJ4zBJySrgMOtJ0VV0N/YjpJ7fMQpwCyK6EnqJFJbxBEKNVeK5x0X96E6Kq5CjRXFzKcnHK1hMsCJgjVDG9OXQC3E/EF+eTt5iL5hEXnnawDwbmTL5gjmjjKkeFIXeaoAoIb9PhU32auzEOPPzzmcT5PaVskFXzFy+cAR/P5GXiBgPB5ng1Dpkcijmu/+SWL2JLbiNK/UeS+jli+XaSCbQp1wY0DzScfqNkUrTf196atpTJNwznRBdcjd5wF44Lb+2CMOE57v/9rl536g77Nhsp1jX6AJt7uTLKjhgucj7URdyT7yVFt2BeYXKhf9WuhSaMrFbc83YQlQSbIo05UGf0NMTRlAivWCdRiJWK3qtrZvgHwAdOBP205e1dFRYYKaqcZzD5tZV8AIN6nveU2ug8lQ9CQve2Li7w+HE5c4qoWUzZpOz2+R/twRgt9yZO4ooCMis8z5OOqlZ4tghaC/wBoAoV0C2J79YMs7WSzY+t5De5/rBIhoxiVAvQSFxijgvBYHUtK6oydJNEv0h2QbtI+2x4Cr5AjuDw8Q678AIyqVbE07gkjtIZUtMC55367Xwt+wYWwKg4CWyZtlGp7gEAgKtGgFy5Ll7In9DA=
+  - secure: E6UUmZmEeZP/j+JvvaIWPAanDECLNvBRJMrfeT+HXCLUhr9+agA0rXc7sOo9E9NM+HZDA8GuxByfjBbC1Ux8pgTt+gBy7anZ+y9BI7248gZvdomRA/w1JIh+WHbzGdH3YxHWKc8nHg8cwLkkgFGcRvnvvhlDB8DJE+6psFY402XtyB/StI+jAYoLBPMitRJvodYnG1sY/bfZwPC5elM73Vr705x4lOttajSwDkjBheAjnF2UASuoaZIDx+1hmH5sH78WWaY6JiMDMu2BKZUgH75mU9FDCcvW9DreT6U7dC5b9n/CD3HIAvuqIgzSid3qXxK/RS9zd2yyrpiO9Zif9nAfc2Lw/UW+u/biQGCDUjnhK8vDiqGL01zRgwHCgy20Plsq8n+Hnbn2b3UlQZMi21x5g3LyTVU+c7Yr2AgkHr4T4AbcRzkMNF62NpgmaPIoFHf6YAxKEyPpIn3DQAPeduUSoUMreCTEVt/bysiLeOiyZzXF/ks3aYZfeZ1L6TKuTo1c4ABnIyw1rI1g7hfVg9UHHy72IN6LG65XJ+sUm5r32RJBFCUQUVzR5+AOtqz/O2NBIXiXN0f9uts8JxrZfYd/5jJAHl9z/rcP/nIMvmXOUG8zKe0G+j6P+vIZk4krXSSYNfK2ml8OOP+XxP3tcfC5NiqSoaCzW8jenfxukSI=
+  - secure: C3jqfPYZ5iaKNgWwJcINV9OKJZi0/B+/1QJmWX01hsiMLdVrVRBKZtk0VUhC/CBJU+MA4r+pXJx3aC7n72KoJKO6QUuUSNRwa/ObH+++AKaNHQmVw9CHHgufUKCJXtBtMaLWIkOAaJM3ofCC0br+ceQvbFIrah97NB1TRUjlp/9hcqBSZpt8DYahAsZ06v/qQZ9+Pp8owuDjMYvRF1I3Tlj5UZMPSzefIf7r+jgDCLnZLoSwqxTaIutX51tJ2DMq2TtGrEZsk335rOFBHg/UQv/h/3Cjbf8OPx6kBnExIrZCDe84HBRhs9ut+WlIb2qVwaCyPcyYVrQpRlJF6dxoQN884KHrvkAsgWfDqZT/O0FgKS/5JDTGMZiC7RUM45qRpyoQtwZJiH2eSXJ9eaM4kTLfmXDu4g5qrwGPkIA7CwvXmo7MK70NLPuZHyrIb1nxm6dkzvPziI+oPmm1iCQasFIADTrn5HcyDQikmazJm5pgFYD8vmAKNvLJ2Yrc5etTNN1k0wBCGS7kCyvAUuOQovMLjmy8K8x/9mVlUxwls2Rpgtd5y4EV/IH/le1wd28exnoPowZOQ3ZjUTT1YWSSB2+VQexwJ+ZKZutAqyF4Qa6t/Za0PW6WWbCnVi/i1jCoFg6y4Ub0ibNq2dOto96d/exhbBATYuvbklyi9cywhtY=
+
