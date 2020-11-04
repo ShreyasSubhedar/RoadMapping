@@ -1,6 +1,7 @@
 <?php
 
 require_once('Classes.php');
+require_once('db_function.php');
 class Car{
 
     private $regNum;
@@ -15,6 +16,14 @@ if(isset($_POST['submit'])){
     $road_length = $_POST['roadLength'];
     $rm = new RoadMap();
     $js=$rm->mapRoad($road_type,$road_length);
+   
+
+        $time  = $js->getTime();
+        $count= $js->getCount();
+        $dist = $js->getDist();
+        $uid= time();
+    db_insert($uid, $dist, $time, $count, $road_length, $road_type,$connection);
+    
 
 }
 
@@ -37,7 +46,7 @@ if(isset($_POST['submit'])){
         <div class="row">
             <div class="col-sm">
                 <div class="jumbotron">
-                    <h1 class="display-4">Road Mapping using Autonomous Car</h1>
+                    <h3 class="display-4">Road Mapping using Autonomous Car</h3>
                 </div>
             </div>
         </div>
@@ -65,8 +74,6 @@ if(isset($_POST['submit'])){
                 </form>
             </div>
         </div>
-         
-  
           <div class="row">
             <div class="col-sm">
                 <div class="card text-center" style="width: 18rem;">
@@ -98,7 +105,41 @@ if(isset($_POST['submit'])){
                     </div>
                 </div>
         </div>
+        <div class="row">
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">UID</th>
+      <th scope="col">Distance</th>
+      <th scope="col">Time</th>
+      <th scope="col">Refuel Count</th>
+      <th scope="col">Road Length</th>
+      <th scope="col">Road Type</th>
+    </tr>
+  </thead>
+  <tbody>
+      <?php 
+      $query="select * from logs";
+      $result=mysqli_query($connection,$query);
+      $row_no =1;
+      while($row=mysqli_fetch_assoc($result)){
+    echo "<tr>";
+    echo "<th scope='row' >{$row_no}</td>";
+    echo "<td>{$row['uid']}</td>";
+    echo "<td>{$row['dist']}</td>";
+    echo "<td>{$row['time']}</td>";
+    echo "<td>{$row['count']}</td>";
+    echo "<td>{$row['roadLength']}</td>";
+    echo "<td>{$row['roadType']}</td>";
+    echo "</tr>";
+    $row_no = $row_no+1;
+      }
+    ?>
+    
     </div>
+      </tbody>
+</table>
 
     
 
