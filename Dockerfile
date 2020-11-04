@@ -13,6 +13,6 @@ ENV APACHE_RUN_USE=www-data \
     APACHE_LOG_DIR=/var/log/apache2
 #Open port 80
 EXPOSE 80
-#start
-CMD ["/usr/sbin/apache2ctl","-D","FOREGROUND"]
 
+#start 
+CMD ["/usr/sbin/apache2ctl","-D","FOREGROUND"]
