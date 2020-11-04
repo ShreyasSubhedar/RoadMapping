@@ -1,3 +1,4 @@
+<h1>Welcome to Car Mapping App</h1>
 <?php
 
 require_once('Classes.php');

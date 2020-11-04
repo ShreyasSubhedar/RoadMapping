@@ -25,17 +25,17 @@ jobs:
   #   - echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USERNAME --password-stdin
   #   - docker build -t $DOCKER_USERNAME/road-mapping .
   #   - docker push $DOCKER_USERNAME/road-mapping
-  - stage: Upload to S3
-    script: 
-     - echo "Deploying to S3" # usually you do not want to rerun any tests   
-     - zip -r archive.zip .
-    deploy: 
-      provider: s3
-      access_key_id: $AWS_ACCESS_KEY_ID
-      secret_access_key: $AWS_SECRET_ACCESS_KEY
-      bucket: "road-mapping"
-      region: ap-south-1
-      glob: "*.zip"
+  # - stage: Upload to S3
+  #   script: 
+  #    - echo "Deploying to S3" # usually you do not want to rerun any tests   
+  #    - zip -r archive.zip .
+  #   deploy: 
+  #     provider: s3
+  #     access_key_id: $AWS_ACCESS_KEY_ID
+  #     secret_access_key: $AWS_SECRET_ACCESS_KEY
+  #     bucket: "road-mapping"
+  #     region: ap-south-1
+  #     glob: "*.zip"
   - stage: Deployment
     script: 
      - echo " Deploying to Beanstalk" # usually you do not want to rerun any tests   
