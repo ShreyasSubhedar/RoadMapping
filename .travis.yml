@@ -28,7 +28,6 @@ jobs:
   - stage: Upload to S3
     script: 
      - echo "Deploying to S3" # usually you do not want to rerun any tests   
-     - zip -f archive.zip . 
     deploy: 
       provider: s3
       access_key_id: $AWS_ACCESS_KEY_ID
