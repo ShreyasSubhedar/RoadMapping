@@ -22,7 +22,7 @@ final class urbanroadTest extends TestCase
     public function testGetSpeedLimit3(): void
     {
         $obj = new UrbanRoad();
-        $this->assertEquals(87.5,$obj->GetSpeedLimit(110));
+        $this->assertEquals(82.5,$obj->GetSpeedLimit(110));
     }
 }
 ?>
