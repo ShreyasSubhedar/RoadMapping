@@ -9,9 +9,11 @@
      protected $percentage;
      protected $garage_distance;
      protected $road_length;
+     protected $road_limit;
     //  protected $initial_speed=70;
 
     function __construct(){
+        $this->road_limit = 0;
         $this->percentage = 15;
         $this->garage_distance = 50;
     }
@@ -36,6 +38,11 @@
  public function SetRoadLength($road_length)
  {
      $this->road_length=$road_length;
+ }
+ public function GetRoadLimit($travelling_capacity)
+ {
+    $this->travelling_capacity= $travelling_capacity + ( $travelling_capacity*$this->road_limit)/100;
+    return $this->travelling_capacity;
  }
 
  }

@@ -23,7 +23,7 @@ class RoadMap extends Journey{
 
     public function mapRoad($roadType,$roadLength){
         $d = new Duration();
-        echo 'Start Time: ' . $d->get_start();
+        // echo 'Start Time: ' . $d->get_start();
         $road = strcmp($roadType,"Urban")==0? new UrbanRoad() : new RuralRoad;
         $garage_dist = $road->get_garage_distance();
         $js = new Journey();
@@ -33,6 +33,7 @@ class RoadMap extends Journey{
 
 
         $curr_capacity = $this->travelling_capacity;
+        $curr_capacity = $road->GetRoadLimit($curr_capacity);
         $curr_capacity = $curr_capacity - $garage_dist;
         $js->updateTotalDistance($garage_dist);
         $js->updateTotalTime($garage_dist/$this->speed);
@@ -59,12 +60,12 @@ class RoadMap extends Journey{
         $js->updateTotalTime($garage_dist/$this->speed);
         $d->setDuration($js->time_taken);
         
-        echo " -------------------------------------------------------------"."\n" ;
-         echo " Total Distance travelled: ". $js->total_distance."\n" ;
-         echo " Number of Times Refueled: ". $js->refuel_count."\n" ;
-         echo " Total Time Taken: ". $js->time_taken. "\n";
-         echo 'End Time: ' . $d->get_end();
-
+        // echo " -------------------------------------------------------------"."\n" ;
+        //  echo " Total Distance travelled: ". $js->total_distance."\n" ;
+        //  echo " Number of Times Refueled: ". $js->refuel_count."\n" ;
+        //  echo " Total Time Taken: ". $js->time_taken. "\n";
+        //  echo 'End Time: ' . $d->get_end();
+        return $js;
 
 
 
