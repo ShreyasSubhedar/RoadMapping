@@ -34,6 +34,7 @@ jobs:
       access_key_id: $AWS_ACCESS_KEY_ID
       secret_access_key: $AWS_SECRET_ACCESS_KEY
       bucket: "road-mapping"
+      region: ap-south-1
       glob: "*.zip"
   - stage: Deployment
     script: 
