@@ -26,6 +26,7 @@ jobs:
   #   - docker build -t $DOCKER_USERNAME/road-mapping .
   #   - docker push $DOCKER_USERNAME/road-mapping
   - stage: Deployment
+    script: skip     # usually you do not want to rerun any tests
     deploy:
       provider: s3
       access_key_id: $AWS_ACCESS_KEY_ID
