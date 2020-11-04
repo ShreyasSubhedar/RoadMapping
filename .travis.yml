@@ -30,7 +30,7 @@ jobs:
      - echo " Deploying to S3" # usually you do not want to rerun any tests
     on:
       all_branches: true     
-      deploy: 
+    deploy: 
         provider: s3
         access_key_id: $AWS_ACCESS_KEY_ID
         secret_access_key: $AWS_SECRET_ACCESS_KEY
