@@ -28,6 +28,7 @@ jobs:
   - stage: Upload to S3
     script: 
      - echo "Deploying to S3" # usually you do not want to rerun any tests   
+     - zip -r archive.zip .
     deploy: 
       provider: s3
       access_key_id: $AWS_ACCESS_KEY_ID
@@ -44,7 +45,7 @@ jobs:
       region: "ap-south-1"
       app: "RM"
       env: "Rm-env"
-      bucket_name: "https://road-mapping.s3.ap-south-1.amazonaws.com/archive.zip"
+      bucket_name: "road-mapping"
     
 env:
   global:
