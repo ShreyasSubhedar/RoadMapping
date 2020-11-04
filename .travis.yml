@@ -11,12 +11,12 @@ before_script:
 - curl -sSfL -o ~/.phpenv/versions/hhvm/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar
 jobs:
   include:
-  # - stage: Static Code Analysis
-  #   script:
-  #   - find . -name '*.php' -exec php -l {} \;
-  # - stage: Unit Testing
-  #   script:
-  #   - phpunit ./Tests/
+  - stage: Static Code Analysis
+    script:
+    - find . -name '*.php' -exec php -l {} \;
+  - stage: Unit Testing
+    script:
+    - phpunit ./Tests/
   # - stage: Security Check
   #   script:
   #   - docker build -t road-mapping .
