@@ -5,7 +5,8 @@ use PHPUnit\Framework\TestCase;
 final class fuelstationTest extends TestCase
 {
         /**
-     * @covers \FuelStation::get_start
+     * @covers \Duration::get_start
+     * @uses \testGetRoadDist::testGetRoadDist
      */
     public function testGetRoadDist(): void
     {
@@ -14,6 +15,13 @@ final class fuelstationTest extends TestCase
     }
             /**
      * @covers \FuelStation::refuel
+     * @uses \FuelStation::__construct
+    * @uses \Journey::__construct
+    * @uses \Journey::getDist
+    * @uses \Journey::updateRefuelCount
+    * @uses \Journey::updateTotalDistance
+    * @uses \Journey::updateTotalTime
+    * @uses \fuelstationTest::testRefuelDist
      */
     public function testRefuelDist(): void
     {
@@ -24,6 +32,13 @@ final class fuelstationTest extends TestCase
     }
                 /**
      * @covers \FuelStation::refuel
+     * @uses \FuelStation::__construct
+    * @uses \Journey::__construct
+    * @uses \Journey::getDist
+    * @uses \Journey::updateRefuelCount
+    * @uses \Journey::updateTotalDistance
+    * @uses \Journey::updateTotalTime
+    * @uses \fuelstationTest::testRefuelTime
      */
     public function testRefuelTime(): void
     {
@@ -34,6 +49,13 @@ final class fuelstationTest extends TestCase
     }
                 /**
      * @covers \FuelStation::refuel
+     * @uses \FuelStation::__construct
+    * @uses \Journey::__construct
+    * @uses \Journey::getDist
+    * @uses \Journey::updateRefuelCount
+    * @uses \Journey::updateTotalDistance
+    * @uses \Journey::updateTotalTime
+    * @uses \fuelstationTest::testRefuelCount
      */
     public function testRefuelCount(): void
     {

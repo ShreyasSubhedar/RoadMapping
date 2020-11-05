@@ -6,6 +6,8 @@ final class journeyTest extends TestCase
 {
                 /**
      * @covers \Journey::updateTotalDistance
+     * @uses \Journey::__construct
+     * @uses \journeyTest::testGetSpeedLimit
      */
     public function testGetSpeedLimit(): void
     {
@@ -14,6 +16,8 @@ final class journeyTest extends TestCase
     }
                     /**
      * @covers \Journey::updateTotalTime
+     * @uses \Journey::__construct
+     * @uses \journeyTest::testupdateTotalTime
      */
     public function testupdateTotalTime(): void
     {
@@ -22,6 +26,8 @@ final class journeyTest extends TestCase
     }
                         /**
      * @covers \Journey::updateRefuelCount
+     * @uses \Journey::__construct
+     * @uses \testupdateRefuelCount::testupdateRefuelCount
      */
     public function testupdateRefuelCount(): void
     {

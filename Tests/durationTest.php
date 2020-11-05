@@ -6,6 +6,11 @@ final class durationTest extends TestCase
 {
     /**
      * @covers \Duration::setDuration
+     * @uses \Duration::__construct
+     * @uses \Duration::get_end
+     * @uses \durationTest::testGetRoadDist
+     * 
+     * 
      */
     public function testGetRoadDist(): void
     {
