@@ -4,6 +4,12 @@ $db['db_host']='aay8bavrnx3ao5.csap6kq18yvn.ap-south-1.rds.amazonaws.com:3306';
 $db['db_user']='root';
 $db['db_pass']='12345678';
 $db['db_name']='roadmapping';
+
+// $db['db_host']=$RDS_HOSTNAME;
+// $db['db_user']=$RDS_USERNAME;
+// $db['db_pass']=$RDS_PASSWORD;
+// $db['db_name']=$RDS_DB_NAME;
+
 foreach($db as $key=>$value){
     define(strtoupper($key),$value);
 }
