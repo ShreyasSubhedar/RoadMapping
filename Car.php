@@ -74,6 +74,7 @@ if(isset($_POST['submit'])){
                 </form>
             </div>
         </div>
+        <?php if ($js){?>
           <div class="row">
             <div class="col-sm">
                 <div class="card text-center" style="width: 18rem;">
@@ -105,6 +106,7 @@ if(isset($_POST['submit'])){
                     </div>
                 </div>
         </div>
+    <?php }?>
         <div class="row">
         <table class="table">
   <thead>
