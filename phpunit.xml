@@ -9,8 +9,9 @@
          beStrictAboutOutputDuringTests="true"
          beStrictAboutTodoAnnotatedTests="true"
          failOnRisky="true"
-         failOnWarning="true"
-         verbose="true">
+         failOnWarning="false"
+         verbose="true"
+          convertWarningsToExceptions="true">
     <testsuites>
         <testsuite name="default">
             <directory suffix="Test.php">./Tests</directory>
@@ -20,7 +21,7 @@
     <coverage cacheDirectory=".phpunit.cache/code-coverage"
               processUncoveredFiles="true">
         <include>
-            <directory suffix=".php">.</directory>
+            <directory suffix=".php">/</directory>
         </include>
     </coverage>
 </phpunit>
