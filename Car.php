@@ -1,9 +1,9 @@
 <?php
+session_start();
 
 
 
 require_once('Classes.php');
-require_once('db_function.php');
 class Car{
 
     private $regNum;
@@ -12,7 +12,7 @@ class Car{
     private $mappingStatus;
     private $fuelStatus = array('Full' => 0, 'Medium' => 0, 'Low' => 0, 'Empty' => 0);
 }
-if(isset($_POST['submit']) && $_POST['roadType']){
+if(isset($_POST['submit'])){
 
     $road_type = $_POST['roadType'];
     $road_length = $_POST['roadLength'];
@@ -24,7 +24,15 @@ if(isset($_POST['submit']) && $_POST['roadType']){
         $count= $js->getCount();
         $dist = $js->getDist();
         $uid= time();
-    db_insert($uid, $dist, $time, $count, $road_length, $road_type,$connection);
+        $query = "INSERT INTO logs(uid, dist, time, count, roadLength,roadType)";
+            
+                $query .= "VALUES({$uid},'{$dist}','{$time}','{$count}','{$road_length}','{$road_type}') "; 
+                    
+                $create_log_query = mysqli_query($connection, $query);    
+        $_SESSION['count']=$count;
+        $_SESSION['dist']= $dist;
+        $_SESSION['time']= $time;
+        header('location: Car.php');
     
 
 }
@@ -77,12 +85,13 @@ if(isset($_POST['submit']) && $_POST['roadType']){
                 </form>
             </div>
         </div>
+        <?php if (isset($_SESSION['dist'])){?>
         <div class="row">
             <div class="col-sm">
                 <div class="card text-center" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">TOTAL DISTANCE TRAVELLED</h5>
-                        <p id="dt"class="card-text"><?php echo $js->getDist() ?></p>
+                        <p id="dt"class="card-text"><?php echo $_SESSION['dist'] ?></p>
                     </div>
                 </div>
             </div>
@@ -90,7 +99,7 @@ if(isset($_POST['submit']) && $_POST['roadType']){
                 <div class="card text-center" style="width: 18rem;">
                         <div class="card-body">
                             <h5 class="card-title">TOTAL TIME TAKEN</h5>
-                            <p id="dt"class="card-text"><?php echo $js->getTime() ?></p>
+                            <p id="dt"class="card-text"><?php echo $_SESSION['time'] ?></p>
                         </div>
                 </div>
             </div>
@@ -99,12 +108,13 @@ if(isset($_POST['submit']) && $_POST['roadType']){
                         <div class="card text-center" style="width: 18rem;">
                                 <div class="card-body">
                                     <h5 class="card-title">REFUEL COUNT</h5>
-                                    <p id="rc"class="card-text"><?php echo $js->getCount()?></p>
+                                    <p id="rc"class="card-text"><?php echo $_SESSION['count']?></p>
                                 </div>
                         </div>
                     </div>
             </div>
         </div>
+        <?php }?>
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by uid.." title="Type in a unique id">
         <div  class='table-wrapper-scroll-y my-custom-scrollbar'>
             <table id="myTable" class='table table-bordered table-striped mb-0'>
