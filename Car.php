@@ -1,7 +1,7 @@
 <?php
-
+session_start();  
 require_once('Classes.php');
-require_once('db_function.php');
+
 class Car{
 
     private $regNum;
@@ -22,8 +22,15 @@ if(isset($_POST['submit'])){
         $count= $js->getCount();
         $dist = $js->getDist();
         $uid= time();
-    db_insert($uid, $dist, $time, $count, $road_length, $road_type,$connection);
-    
+               $query = "INSERT INTO logs(uid, dist, time, count, roadLength,roadType)";
+            
+               $query .= "VALUES({$uid},'{$dist}','{$time}','{$count}','{$road_length}','{$road_type}') "; 
+                      
+               $create_log_query = mysqli_query($connection, $query);    
+        $_SESSION['count']=$count;
+        $_SESSION['dist']= $dist;
+        $_SESSION['time']= $time;
+    header('location: Car.php');
 
 }
 
@@ -74,13 +81,13 @@ if(isset($_POST['submit'])){
                 </form>
             </div>
         </div>
-        <?php if (isset($js)){?>
+        <?php if (isset($_SESSION['dist'])){?>
           <div class="row">
             <div class="col-sm">
                 <div class="card text-center" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">TOTAL DISTANCE TRAVELLED</h5>
-                    <p id="dt"class="card-text"><?php echo $js->getDist() ?></p>
+                    <p id="dt"class="card-text"><?php echo $_SESSION['dist'] ?></p>
                     
                 </div>
                 </div>
@@ -89,7 +96,7 @@ if(isset($_POST['submit'])){
                     <div class="card text-center" style="width: 18rem;">
                         <div class="card-body">
                             <h5 class="card-title">TOTAL TIME TAKEN</h5>
-                            <p id="dt"class="card-text"><?php echo $js->getTime() ?></p>
+                            <p id="dt"class="card-text"><?php echo $_SESSION['time'] ?></p>
                             
                         </div>
                     </div>
@@ -99,14 +106,16 @@ if(isset($_POST['submit'])){
                         <div class="card text-center" style="width: 18rem;">
                                 <div class="card-body">
                                     <h5 class="card-title">REFUEL COUNT</h5>
-                                    <p id="rc"class="card-text"><?php echo $js->getCount()?></p>
+                                    <p id="rc"class="card-text"><?php echo $_SESSION['count']?></p>
                                     
                                 </div>
                         </div>
                     </div>
                 </div>
         </div>
+
     <?php }?>
+
         <div class="row">
         <table class="table">
   <thead>
