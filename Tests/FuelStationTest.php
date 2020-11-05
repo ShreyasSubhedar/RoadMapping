@@ -6,7 +6,8 @@ final class fuelstationTest extends TestCase
 {
         /**
      * @covers \Duration::get_start
-     * @uses \testGetRoadDist::testGetRoadDist
+     * @uses  \Duration::__construct
+     * @uses \fuelstationTest::testGetRoadDist
      */
     public function testGetRoadDist(): void
     {
@@ -35,6 +36,7 @@ final class fuelstationTest extends TestCase
      * @uses \FuelStation::__construct
     * @uses \Journey::__construct
     * @uses \Journey::getDist
+        * @uses \Journey::getTime
     * @uses \Journey::updateRefuelCount
     * @uses \Journey::updateTotalDistance
     * @uses \Journey::updateTotalTime
@@ -52,6 +54,7 @@ final class fuelstationTest extends TestCase
      * @uses \FuelStation::__construct
     * @uses \Journey::__construct
     * @uses \Journey::getDist
+        * @uses \Journey::getCount
     * @uses \Journey::updateRefuelCount
     * @uses \Journey::updateTotalDistance
     * @uses \Journey::updateTotalTime

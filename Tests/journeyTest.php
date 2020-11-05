@@ -27,7 +27,8 @@ final class journeyTest extends TestCase
                         /**
      * @covers \Journey::updateRefuelCount
      * @uses \Journey::__construct
-     * @uses \testupdateRefuelCount::testupdateRefuelCount
+     * @uses \Journey::__construct
+     * @uses \journeyTest::testupdateRefuelCount
      */
     public function testupdateRefuelCount(): void
     {
