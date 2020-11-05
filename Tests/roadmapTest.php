@@ -119,6 +119,10 @@ final class roadmapTest extends TestCase
      * @uses \UrbanRoad::__construct
      * @uses \UrbanRoad::get_garage_distance
      * @uses \roadmapTest::testMapRoad4
+     * @uses \RuralRoad::GetRoadLimit
+     * @uses \RuralRoad::GetSpeedLimit
+     * @uses \RuralRoad::__construct
+     * @uses \RuralRoad::get_garage_distance
      */
     public function testMapRoad4(): void
     {
@@ -131,6 +135,10 @@ final class roadmapTest extends TestCase
     }
                 /**
      * @covers \RoadMap::mapRoad
+     * @uses \RuralRoad::GetRoadLimit
+     * @uses \RuralRoad::GetSpeedLimit
+     * @uses \RuralRoad::__construct
+     * @uses \RuralRoad::get_garage_distance
      * @uses \Duration::__construct
      * @uses \Duration::setDuration
      * @uses \FuelStation::__construct
@@ -168,6 +176,10 @@ final class roadmapTest extends TestCase
      * @uses \FuelStation::getRoadDist
      * @uses \FuelStation::refuel
      * @uses \Journey::__construct
+     * @uses \RuralRoad::GetRoadLimit
+     * @uses \RuralRoad::GetSpeedLimit
+     * @uses \RuralRoad::__construct
+     * @uses \RuralRoad::get_garage_distance
      * @uses \Journey::getCount
      * @uses \Journey::getDist
      * @uses \Journey::getTime
