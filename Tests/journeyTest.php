@@ -1,7 +1,6 @@
 <?php
 require_once ('Classes.php');
 use PHPUnit\Framework\TestCase;
-
 final class journeyTest extends TestCase
 {
                 /**
