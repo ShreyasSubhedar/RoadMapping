@@ -25,7 +25,8 @@ The car must travel the entire length of the road and return to the garage to ma
 
 
 ## Approach: 
-![Class Diagram](https://github.com/ShreyasSubhedar/RoadMapping/blob/master/Docs/images/class-diagram.png)
+<img width="1268" alt="Roadmap_classdiagram" src="https://user-images.githubusercontent.com/51235238/98239092-70e77980-1f8d-11eb-9b5b-f53123e98eb9.png">
+
 ## Instruction 
 [Hosted Web App](http://rm-env.eba-beqhjpa5.ap-south-1.elasticbeanstalk.com/Car.php)
 
