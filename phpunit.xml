@@ -8,10 +8,9 @@
          beStrictAboutCoversAnnotation="true"
          beStrictAboutOutputDuringTests="true"
          beStrictAboutTodoAnnotatedTests="true"
-         failOnRisky="true"
+         failOnRisky="flase"
          failOnWarning="false"
-         verbose="true"
-          convertWarningsToExceptions="true">
+         verbose="true">
     <testsuites>
         <testsuite name="default">
             <directory suffix="Test.php">./Tests</directory>
