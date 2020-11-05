@@ -4,6 +4,9 @@ use PHPUnit\Framework\TestCase;
 
 final class durationTest extends TestCase
 {
+    /**
+     * @covers \Duration::setDuration
+     */
     public function testGetRoadDist(): void
     {
         $obj = new Duration();

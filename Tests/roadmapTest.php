@@ -4,6 +4,9 @@ use PHPUnit\Framework\TestCase;
 
 final class roadmapTest extends TestCase
 {
+                /**
+     * @covers \RoadMap::mapRoad
+     */
     public function testMapRoad1(): void
     {
         $obj = new RoadMap();
@@ -13,6 +16,10 @@ final class roadmapTest extends TestCase
         $this->assertEquals(14.26190476190476,$journy->getTime());
         $this->assertEquals(3,$journy->getCount());
     }
+                    /**
+     * @covers \RoadMap::mapRoad
+     */
+
     public function testMapRoad2(): void
     {
         $obj = new RoadMap();
@@ -22,6 +29,9 @@ final class roadmapTest extends TestCase
         $this->assertEquals(0.7619047619047619,$journy->getTime());
         $this->assertEquals(0,$journy->getCount());
     }
+                /**
+     * @covers \RoadMap::mapRoad
+     */
     public function testMapRoad3(): void
     {
         $obj = new RoadMap();
@@ -31,6 +41,9 @@ final class roadmapTest extends TestCase
         $this->assertEquals(21.3571428571428549,$journy->getTime());
         $this->assertEquals(5,$journy->getCount());
     }
+                /**
+     * @covers \RoadMap::mapRoad
+     */
     public function testMapRoad4(): void
     {
         $obj = new RoadMap();
@@ -40,6 +53,9 @@ final class roadmapTest extends TestCase
         $this->assertEquals(10.568322981366459,$journy->getTime());
         $this->assertEquals(3,$journy->getCount());
     }
+                /**
+     * @covers \RoadMap::mapRoad
+     */
     public function testMapRoad5(): void
     {
         $obj = new RoadMap();
@@ -49,6 +65,9 @@ final class roadmapTest extends TestCase
         $this->assertEquals(1.2422360248447204,$journy->getTime());
         $this->assertEquals(0,$journy->getCount());
     }
+                /**
+     * @covers \RoadMap::mapRoad
+     */
     public function testMapRoad6(): void
     {
         $obj = new RoadMap();

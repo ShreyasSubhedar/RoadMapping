@@ -4,21 +4,33 @@ use PHPUnit\Framework\TestCase;
 
 final class urbanroadTest extends TestCase
 {
+                        /**
+     * @covers \UrbanRoad::GetSpeedLimit
+     */
     public function testGetSpeedLimit(): void
     {
         $obj = new UrbanRoad();
         $this->assertEquals(52.5,$obj->GetSpeedLimit(70));
     }
+                            /**
+     * @covers \UrbanRoad::GetSpeedLimit
+     */
     public function testGetSpeedLimit1(): void
     {
         $obj = new UrbanRoad();
         $this->assertEquals(37.5,$obj->GetSpeedLimit(50));
     }
+                            /**
+     * @covers \UrbanRoad::GetSpeedLimit
+     */
     public function testGetSpeedLimit2(): void
     {
         $obj = new UrbanRoad();
         $this->assertEquals(0,$obj->GetSpeedLimit(0));
     }
+                            /**
+     * @covers \UrbanRoad::GetSpeedLimit
+     */
     public function testGetSpeedLimit3(): void
     {
         $obj = new UrbanRoad();
