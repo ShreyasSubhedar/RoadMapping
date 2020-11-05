@@ -4,9 +4,6 @@ services:
 - docker
 php:
 - '7.3'
-install:
- - composer require satooshi/php-coveralls:~1.0@stable # Require phpCoveralls
-
 cache:
   directories:
   - "$HOME/.composer/cache"
@@ -17,7 +14,7 @@ jobs:
     - find . -name '*.php' -exec php -l {} \;
   - stage: Unit Testing
     script:
-    - phpunit --coverage-clover build/logs/clover.xml ./Tests/
+    - phpunit ./Tests/
   # - stage: Security Check
   #   script:
   #   - docker build -t road-mapping .
