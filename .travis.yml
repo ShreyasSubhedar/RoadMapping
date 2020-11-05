@@ -26,6 +26,7 @@ jobs:
     - docker build -t $DOCKER_USERNAME/road-mapping .
     - docker push $DOCKER_USERNAME/road-mapping
   
+
   - stage: Deployment
     script: 
      - echo " Deploying to Beanstalk" # usually you do not want to rerun any tests   
