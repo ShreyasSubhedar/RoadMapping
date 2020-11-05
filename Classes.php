@@ -7,5 +7,6 @@ include_once 'Duration.php';
 include_once 'FuelStation.php';
 include_once 'Journey.php';
 include_once 'RoadMap.php';
+include "db.php";
 
 ?>

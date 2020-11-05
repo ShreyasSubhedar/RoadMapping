@@ -18,6 +18,7 @@ class Duration{
         return $this->end_time;
 
     }
+        // @covers Duration
     function setDuration($hrs){
         $this->duration = $hrs;
         $this->end_time = strtotime("+$this->duration hour", strtotime($this->start_time));

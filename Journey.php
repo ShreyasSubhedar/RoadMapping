@@ -14,7 +14,18 @@
             
    
         }
+        function getDist(){
+            return $this->total_distance;
 
+        }
+        function getTime(){
+            return $this->time_taken;
+            
+        }
+        function getCount(){
+            return $this->refuel_count;
+            
+        }
         public function updateTotalDistance($val){
             $this->total_distance = $this->total_distance + $val;
 
