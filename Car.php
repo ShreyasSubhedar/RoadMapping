@@ -120,9 +120,10 @@ if(isset($_POST['submit'])){
   </thead>
   <tbody>
       <?php 
-      $query="select * from logs";
+      $query="select * from logs order by uid desc";
       $result=mysqli_query($connection,$query);
       $row_no =1;
+      echo "<div class='container vertical-scrollable'>";
       while($row=mysqli_fetch_assoc($result)){
     echo "<tr>";
     echo "<th scope='row' >{$row_no}</td>";
@@ -135,6 +136,7 @@ if(isset($_POST['submit'])){
     echo "</tr>";
     $row_no = $row_no+1;
       }
+      echo "</div>";
     ?>
     
     </div>
